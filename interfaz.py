@@ -15,9 +15,10 @@ def complejo_a_str(z: tuple[float, float, Representaciones]) -> str:
     if z[2] == Representaciones.BINOMICA:
         return f'{z[0]:.2f} {"-" if z[1] < 0 else "+"} {abs(z[1]):.2f}i'
     if z[2] == Representaciones.EXPONENCIAL:
-        return f'{z[0]:.2f}e^({Fraction(z[1] / math.pi).limit_denominator(8)}π·i)'
+        return f'{z[0]:.2f}e^({Fraction(z[1] / math.pi).limit_denominator(100)}π·i)'
     if z[2] == Representaciones.POLAR:
-        return f'{z[0]:.2f}cis({Fraction(z[1] / math.pi).limit_denominator(8)}π)'
+        return f'{z[0]:.2f}cis({Fraction(z[1] / math.pi).limit_denominator(100)}π)'
+        #return f'{z[0]:.2f}cis({(z[1] / math.pi):.4f}π)'
     return ''
 
 
