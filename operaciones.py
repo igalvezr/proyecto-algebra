@@ -132,5 +132,9 @@ def operar(z1: tuple[float, float, Representaciones], z2: tuple[float, float, Re
     # convertir los resultados
     resultados_c = [convertir_a(w, tipo_deseado) for w in resultados]
 
+    # normalizar los resultados antes de entregarlos
+    if resultados_c[0][2] != Representaciones.BINOMICA:
+        resultados_c = [(res[0], res[1] % (2*math.pi), res[2]) for res in resultados_c]
+
     # regresar los resultados
     return resultados_c
