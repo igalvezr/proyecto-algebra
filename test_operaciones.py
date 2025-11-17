@@ -147,26 +147,28 @@ def test_polar_potencia(entrada, objetivo):
 # ==================== RAÍZ - POLAR ====================
 @pytest.mark.parametrize('entrada, objetivo_w1', [
     # Raíz cuadrada de 4∠0 -> dos raíces: 2∠0 y 2∠π
-    (((4, 0, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), (2, 0, Representaciones.POLAR)),
+    (((4, 0, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), [(2, 0, Representaciones.POLAR)]),
     # Raíz cuadrada de 9∠π -> 3∠π/2 y 3∠3π/2
-    (((9, math.pi, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), (3, math.pi/2, Representaciones.POLAR)),
+    (((9, math.pi, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), [(3, math.pi/2, Representaciones.POLAR)]),
     # Raíz cúbica de 8∠0 -> 2∠0, 2∠2π/3, 2∠4π/3
-    (((8, 0, Representaciones.POLAR), (3, 0, Representaciones.POLAR)), (2, 0, Representaciones.POLAR)),
+    (((8, 0, Representaciones.POLAR), (3, 0, Representaciones.POLAR)), [(2, 0, Representaciones.POLAR)]),
     # Raíz cuadrada de 16∠π/2 -> 4∠π/4 y 4∠5π/4
-    (((16, math.pi/2, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), (4, math.pi/4, Representaciones.POLAR)),
+    (((16, math.pi/2, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), [(4, math.pi/4, Representaciones.POLAR)]),
     # Raíz cuadrada de 1∠0 -> 1∠0 y 1∠π
-    (((1, 0, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), (1, 0, Representaciones.POLAR)),
+    (((1, 0, Representaciones.POLAR), (2, 0, Representaciones.POLAR)), [(1, 0, Representaciones.POLAR)]),
+
+    (((2, math.pi/6, Representaciones.POLAR), (3, 0, Representaciones.POLAR)), [(1.259921, math.pi/18, Representaciones.POLAR)]),
 ])
 def test_polar_raiz(entrada, objetivo_w1):
     z1, z2 = entrada
     resultados = operar(z1, z2, Operacion.RAIZ)
-    # Verificar la primera raíz
-    resultado = resultados[0]
-    assert resultado[2] == objetivo_w1[2]
-    assert es_cercano(objetivo_w1[0], resultado[0])
-    angulo_resultado = resultado[1] % (2*math.pi)
-    angulo_objetivo = objetivo_w1[1] % (2*math.pi)
-    assert es_cercano(angulo_objetivo, angulo_resultado)
+    assert len(resultados) == round(entrada[1][0])
+    # Verificar cada resultado
+    for indice in range(len(objetivo_w1)):
+        assert objetivo_w1[indice][2] == resultados[indice][2]
+        assert es_cercano(objetivo_w1[indice][0], resultados[indice][0])
+        assert es_cercano(objetivo_w1[indice][1], resultados[indice][1])
+    
 
 # ==================== MULTIPLICACIÓN - POLAR ====================
 @pytest.mark.parametrize('entrada, objetivo', [
