@@ -1,3 +1,6 @@
+'''
+Enumeraciones con constantes representando las operaciones y representaciones disponibles.
+'''
 from enum import Enum
 
 # operaciones

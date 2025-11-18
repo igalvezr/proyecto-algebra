@@ -1,3 +1,10 @@
+'''
+Archivo principal del programa.
+
+Contiene un prototipo de interfaz desde la terminal (CLI), pero principalmente, contiene
+la llamada a la función que ejecuta la interfaz con TkInter.
+'''
+
 from operaciones import operar
 from Tipos import Representaciones, Operacion
 from interfaz import gui

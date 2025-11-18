@@ -1,3 +1,10 @@
+'''
+Suite de tests para las operaciones entre complejos.
+
+Contiene métodos parametrizados para realizar tests unitarios sobre
+operaciones específicas con representaciones específicas. Está
+diseñado para funcionar utilizando pytest.
+'''
 import pytest
 
 from operaciones import operar

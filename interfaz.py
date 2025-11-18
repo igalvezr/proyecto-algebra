@@ -1,7 +1,18 @@
+'''
+Implementación de la interfaz gráfica de usuario usando TkInter.
+
+Define la función gui, que contiene la lógica para construir y ejecutar la
+interfaz gráfica. Además, implementa toda la lógica necesaria para interactuar
+con la calculadora y realizar todas sus funciones, utilizando las abstracciones
+definidas en conversion.py, argand.py, operaciones.py, así como las literales
+definidas en Tipos.py para representar tanto las operaciones disponibles
+como las representaciones para cada complejo.
+'''
+
 from fractions import Fraction
 from tkinter import *
 from tkinter import ttk, messagebox
-import cmath, math, re
+import math
 
 from argand import graficar_en_argand
 from Tipos import Operacion, Representaciones
@@ -12,6 +23,16 @@ from operaciones import operar
 
 
 def complejo_a_str(z: tuple[float, float, Representaciones]) -> str:
+    '''
+    Devuelve la representación en texto de un complejo dado
+    
+    :param z: El complejo a transformar
+    :type z: tuple[float, float, Representaciones]
+    :return: Un string con la representación del complejo
+    :rtype: str
+    '''
+
+    # Dependiendo del tipo de representación, se usa un formato u otro
     if z[2] == Representaciones.BINOMICA:
         return f'{z[0]:.2f} {"-" if z[1] < 0 else "+"} {abs(z[1]):.2f}i'
     if z[2] == Representaciones.EXPONENCIAL:
@@ -23,6 +44,9 @@ def complejo_a_str(z: tuple[float, float, Representaciones]) -> str:
 
 
 def gui():
+    '''
+    Función que lanza la interfaz gráfica de usuario con TkInter.
+    '''
     # Ventana principal
     origen = Tk()
     origen.config(bg="black")
@@ -123,6 +147,8 @@ def gui():
 
     # ===== Verificación =====
     def verificar():
+        # Esta función implementa la lógica para tomar la entrada del usuario y con ello realizar
+        # las operaciones necesarias.
         forma = combo_forma.get()
         operacion = combo_operacion.get()
         n1 = num1.get().strip()
